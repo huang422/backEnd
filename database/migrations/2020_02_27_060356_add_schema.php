@@ -15,10 +15,8 @@ class AddSchema extends Migration
     {
         Schema::table('news', function ($table) {
             $table->string('text');
-            $table->string('title')->nullable()	;
-
         });
-        
+
     }
 
     /**
