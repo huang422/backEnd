@@ -13,12 +13,10 @@
 
 Route::get('/', 'FrontController@index');
 
-Route::get('/news', 'FrontController@news');
+Route::get('news', 'FrontController@news');
 
-Route::get('/product', 'FrontController@product');
-
-// Route::get('/product', function () {
-//     return view('front/product');
+// Route::get('/news', function () {
+//     return view('front/news');
 // });
 
 Auth::routes();
@@ -27,16 +25,12 @@ Auth::routes();
 
 
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth'],"prefix" => '/home'], function () {
     //首頁
-    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/', 'HomeController@index')->name('home');
 
     //最新消息
-    Route::get('/home/news', 'NewsController@index');
-    Route::post('/home/news/store', 'NewsController@store');
-
-    //product
-    Route::get('/home/product', 'ProductController@index');
-    Route::post('/home/product/store','ProductController@store');
+    Route::get('/news', 'NewsController@index');
+    Route::post('/news/store', 'NewsController@store');
 
 });
