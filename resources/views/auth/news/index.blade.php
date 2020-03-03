@@ -30,7 +30,10 @@
                     <td>{{$item->text}}</td>
                     <td>
                         <a href="/home/news/edit/{{$item->id}}" class="btn btn-success btn-sm">修改</a>
-                        <button class="btn btn-danger btn-sm">刪除</button>
+                        <button class="btn btn-danger btn-sm" onclick="show_confirm({{$item->id}})" >刪除</button>
+                        <form id="delete-form-{{$item->id}}" action="/home/news/delete/{{$item->id}}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                     </td>
                 </tr>
 
@@ -48,9 +51,19 @@
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
 <script>
+
     $(document).ready(function() {
     $('#example').DataTable();
     } );
+
+    function show_confirm(id){
+
+        var r = confirm("確認刪除?")
+        if (r==true){
+            document.getElementById('delete-form-'+id).submit();
+        }
+    }
+
 </script>
 
 @endsection

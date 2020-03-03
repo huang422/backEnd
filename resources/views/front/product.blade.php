@@ -22,7 +22,7 @@
               <div>
                   @foreach ($product_data as $item)
 
-                  <div class="mbr-gallery-item mbr-gallery-item--p2" data-video-url="false" data-tags="{{$item->title}}">
+                  <div class="mbr-gallery-item mbr-gallery-item--p2" data-video-url="false" data-tags="{{$item->id}}">
                     <div href="#lb-gallery2-3" data-slide-to="{{$item->id-1}}" data-toggle="modal"><img
                         src="{{$item->img}}" alt="" title=""></div>
                   </div>
@@ -68,6 +68,11 @@
             <div class="modal-content">
               <div class="modal-body">
                 <div class="carousel-inner">
+                    {{-- @foreach ($product_data as $item)
+
+                    <div class="carousel-item active "><img src="{{$item->img}}" alt="" title="{{$item->title}}"></div>
+
+                    @endforeach --}}
                   <div class="carousel-item active"><img src="assets/images/background1.jpg" alt="" title=""></div>
                   <div class="carousel-item"><img src="assets/images/background2.jpg" alt="" title=""></div>
                   <div class="carousel-item"><img src="assets/images/background3.jpg" alt="" title=""></div>

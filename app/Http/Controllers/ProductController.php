@@ -19,6 +19,24 @@ class ProductController extends Controller
         $product_data = $request->all();
         Product::create($product_data);
         return redirect('/home/product');
+    }
 
+    public function edit($id){
+        $product = Product::find($id);
+        return view('auth/product/edit',compact('product'));
+    }
+
+    public function update(Request $request,$id){
+        $product = Product::find($id);
+        $product->img = $request->img;
+        $product->title = $request->title;
+        $product->text = $request->text;
+        $product->save();
+        return redirect('/home/product');
+    }
+
+    public function delete(Request $request,$id){
+        Product::find($id)->delete();
+        return redirect('/home/product');
     }
 }

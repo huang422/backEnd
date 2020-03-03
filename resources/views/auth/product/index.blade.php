@@ -10,7 +10,7 @@
 {{-- <form method="post" action="/home/product/store">
     @csrf --}}
     <div class="container">
-        <a href="/home/product/create" class="btn btn-success">新增最新消息</a>
+        <a href="/home/product/create" class="btn btn-success">新增產品</a>
 
         <table id="example" class="table table-striped table-bordered" style="width:100%">
             <thead>
@@ -30,7 +30,10 @@
                     <td>{{$item->text}}</td>
                     <td>
                         <a href="/home/product/edit/{{$item->id}}" class="btn btn-success btn-sm">修改</a>
-                        <button class="btn btn-danger btn-sm">刪除</button>
+                        <button class="btn btn-danger btn-sm" onclick="show_confirm({{$item->id}})">刪除</button>
+                        <form id="delete-form-{{$item->id}}" action="/home/product/delete/{{$item->id}}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                     </td>
                 </tr>
 
@@ -51,6 +54,15 @@
     $(document).ready(function() {
     $('#example').DataTable();
     } );
+
+    function show_confirm(id){
+        var r = confirm("確認刪除?")
+        if(r==true){
+            document.getElementById('delete-form-'+id).submit();
+        }
+    }
+
+
 </script>
 
 @endsection
