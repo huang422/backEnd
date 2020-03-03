@@ -62,9 +62,9 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link link text-white display-4" href="https://mobirise.com">
+                    <a class="nav-link link text-white display-4" href="/product">
                         <span class="mbri-search mbr-iconfont mbr-iconfont-btn"></span>
-                        About Us
+                        Product
                     </a>
                 </li>
             </ul>

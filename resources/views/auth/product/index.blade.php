@@ -7,10 +7,10 @@
 @section('content')
 
 
-{{-- <form method="post" action="/home/news/store">
+{{-- <form method="post" action="/home/product/store">
     @csrf --}}
     <div class="container">
-        <a href="/home/news/create" class="btn btn-success">新增最新消息</a>
+        <a href="/home/product/create" class="btn btn-success">新增最新消息</a>
 
         <table id="example" class="table table-striped table-bordered" style="width:100%">
             <thead>
@@ -22,14 +22,14 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($all_news as $item)
+                @foreach ($all_product as $item)
 
                 <tr>
                     <td><img src="{{$item->img}}" alt=""></td>
                     <td>{{$item->title}}</td>
                     <td>{{$item->text}}</td>
                     <td>
-                        <a href="/home/news/edit/{{$item->id}}" class="btn btn-success btn-sm">修改</a>
+                        <a href="/home/product/edit/{{$item->id}}" class="btn btn-success btn-sm">修改</a>
                         <button class="btn btn-danger btn-sm">刪除</button>
                     </td>
                 </tr>
