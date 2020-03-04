@@ -15,7 +15,7 @@
 
         <div class="form-group">
             <label for="img">現有IMG</label>
-            <img width="250" src="/storage/{{$news->img}}" alt="">
+            <img width="250" src="{{$news->img}}" alt="">
         </div>
 
         <div class="form-group">
