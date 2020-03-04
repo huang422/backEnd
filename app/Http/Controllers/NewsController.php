@@ -1,41 +1,52 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\News;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $all_news = News::all();
-        return view('auth/news/index',compact('all_news'));
+        return view('auth/news/index', compact('all_news'));
     }
 
-    public function create(){
+    public function create()
+    {
         return view('auth/news/create');
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $news_data = $request->all();
+
+        //上傳檔案
+        $file_name = $request->file('img')->store('', 'public');
+        $news_data['img'] = $file_name;
+
         News::create($news_data);
         return redirect('/home/news');
-
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
 
         // $news = News::where('id','=','$id')->first();
 
         $news = News::find($id);
 
-        return view('auth/news/edit',compact('news'));
+        return view('auth/news/edit', compact('news'));
     }
 
-    public function update(Request $request,$id){
+    public function update(Request $request, $id)
+    {
 
         $news = News::find($id);
         $news->img = $request->img;
         $news->title = $request->title;
+        $news->sort = $request->sort;
         $news->text = $request->text;
         $news->save();
 
@@ -44,7 +55,8 @@ class NewsController extends Controller
         return redirect('/home/news');
     }
 
-    public function delete(Request $request,$id){
+    public function delete(Request $request, $id)
+    {
         News::find($id)->delete();
         return redirect('/home/news');
     }

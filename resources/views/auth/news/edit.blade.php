@@ -7,28 +7,43 @@
 @section('content')
 
 
-<form method="post" action="/home/news/update/{{$news->id}}">
+<form method="post" action="/home/news/update/{{$news->id}}" enctype="multipart/form-data">
     @csrf
     <div class="container">
 
-        <div class="form-group">
-            <label for="img">IMG</label>
-            <input type="text" class="form-control" id="img" name="img" value="{{$news->img}}">
+        <h1>修改最新消息</h1>
 
-          </div>
-          <div class="form-group">
+        <div class="form-group">
+            <label for="img">現有IMG</label>
+            <img width="250" src="/storage/{{$news->img}}" alt="">
+        </div>
+
+        <div class="form-group">
+            <label for="img">修改IMG</label>
+            <input type="file" class="form-control" id="img" name="img" value="{{$news->img}}">
+        </div>
+
+        <div class="form-group">
             <label for="title">TITLE</label>
             <input type="text" class="form-control" id="title" name="title" value="{{$news->title}}">
 
-          </div>
-          <div class="form-group">
+        </div>
+        <div class="form-group">
             <label for="text">TEXT</label>
             <textarea class="form-control" name="text" id="text" cols="30" rows="10">{{$news->text}}</textarea>
-          </div>
+        </div>
 
-          <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="form-group">
+            <label for="sort">SORT</label>
+            <input type="number" min="0" class="form-control" id="sort" name="sort" value="{{$news->sort}}">
+
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
     </div>
 </form>
+
+@endsection
 
 @section('js')
 
@@ -39,7 +54,5 @@
     $('#example').DataTable();
     } );
 </script>
-
-@endsection
 
 @endsection

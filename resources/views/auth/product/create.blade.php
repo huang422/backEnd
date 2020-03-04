@@ -7,13 +7,15 @@
 @section('content')
 
 
-<form method="post" action="/home/product/store">
+<form method="post" action="/home/product/store" enctype="multipart/form-data">
     @csrf
     <div class="container">
 
+        <h1>新增產品</h1>
+
         <div class="form-group">
             <label for="img">IMG</label>
-            <input type="text" class="form-control" id="img" name="img">
+            <input type="file" class="form-control" id="img" name="img" required    >
 
           </div>
           <div class="form-group">
@@ -30,6 +32,8 @@
     </div>
 </form>
 
+@endsection
+
 @section('js')
 
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
@@ -42,4 +46,4 @@
 
 @endsection
 
-@endsection
+

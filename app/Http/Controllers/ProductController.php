@@ -17,6 +17,11 @@ class ProductController extends Controller
 
     public function store(Request $request){
         $product_data = $request->all();
+
+         //上傳檔案
+         $file_name = $request->file('img')->store('', 'public');
+         $product_data['img'] = $file_name;
+
         Product::create($product_data);
         return redirect('/home/product');
     }
@@ -30,8 +35,10 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product->img = $request->img;
         $product->title = $request->title;
+        $product->sort = $request->sort;
         $product->text = $request->text;
         $product->save();
+
         return redirect('/home/product');
     }
 

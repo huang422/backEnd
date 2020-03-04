@@ -11,12 +11,14 @@
     @csrf --}}
     <div class="container">
         <a href="/home/product/create" class="btn btn-success">新增產品</a>
+        <hr>
 
         <table id="example" class="table table-striped table-bordered" style="width:100%">
             <thead>
                 <tr>
                     <th>img</th>
                     <th>title</th>
+                    <th>sort</th>
                     <th>text</th>
                     <th width="130"></th>
                 </tr>
@@ -25,8 +27,9 @@
                 @foreach ($all_product as $item)
 
                 <tr>
-                    <td><img src="{{$item->img}}" alt=""></td>
+                    <td><img  width="200" src="{{asset('/storage/'.$item->img)}}" alt=""></td>
                     <td>{{$item->title}}</td>
+                    <td>{{$item->sort}}</td>
                     <td>{{$item->text}}</td>
                     <td>
                         <a href="/home/product/edit/{{$item->id}}" class="btn btn-success btn-sm">修改</a>
@@ -46,19 +49,24 @@
     </div>
 </form>
 
+@endsection
+
 @section('js')
 
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
 <script>
     $(document).ready(function() {
-    $('#example').DataTable();
+    $('#example').DataTable({"order": [[ 3, 'desc' ] ]});
     } );
 
     function show_confirm(id){
         var r = confirm("確認刪除?")
         if(r==true){
-            document.getElementById('delete-form-'+id).submit();
+
+            // document.getElementById('delete-form-'+id).submit();
+            // document.getElementById(`delete-form-${id}`).submit();
+            document.querySelector(`#delete-form-${id}`).submit();
         }
     }
 
@@ -67,4 +75,4 @@
 
 @endsection
 
-@endsection
+

@@ -14,7 +14,7 @@
             <div class="card p-3 col-12 col-md-6 col-lg-4">
                 <div class="card-wrapper">
                     <div class="card-img">
-                        <img src="{{$item->img}}" alt="Mobirise">
+                        <img src="{{asset('/storage/'.$item->img)}}" alt="Mobirise">
                     </div>
                     <div class="card-box">
                         <h4 class="card-title mbr-fonts-style display-7">
