@@ -18,6 +18,12 @@
             <input type="file" class="form-control" id="img" name="img" required>
 
           </div>
+
+          <div class="form-group">
+            <label for="news_url">多張IMG</label>
+            <input type="file" class="form-control" id="news_url" name="news_url[]" multiple required >
+
+          </div>
           <div class="form-group">
             <label for="title">TITLE</label>
             <input type="text" class="form-control" id="title" name="title">

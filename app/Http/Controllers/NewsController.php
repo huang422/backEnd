@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\News;
+use App\NewsImgs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -21,6 +22,7 @@ class NewsController extends Controller
 
     public function store(Request $request)
     {
+        //單張圖上傳
         $news_data = $request->all();
         if ($request->hasFile('img')) {
             $file = $request->file('img');
@@ -28,7 +30,28 @@ class NewsController extends Controller
             $news_data['img'] = $path;
         }
 
-        News::create($news_data);
+        $news_news = News::create($news_data);
+
+        // 多張圖上傳
+
+
+
+        if($request->hasFile('news_url'))
+        {
+            $files = $request->file('news_url');
+            foreach ($files as $file) {
+                //上傳圖片
+                $path = $this->fileUpload($file,'news');
+
+                //新增資料進DB
+                $news_imgs = new NewsImgs;
+                $news_imgs->news_id = $news_news->id;
+                $news_imgs->news_url = $path;
+                $news_imgs->save();
+
+            }
+        }
+
         return redirect('/home/news');
     }
 
