@@ -4,15 +4,17 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
 
 <style>
-
-
+    .news_img_card .btn-danger {
+        position: absolute;
+        right: -5px;
+        top: -5px;
+        border-radius: 50%;
+    }
 </style>
-
-
 @endsection
 
-@section('content')
 
+@section('content')
 
 <form method="post" action="/home/news/update/{{$news->id}}" enctype="multipart/form-data">
     @csrf
@@ -36,8 +38,8 @@
             @foreach ($news->news_imgs as $item)
 
             <div class="col-2">
-                <div class="news_img_card">
-                    <button type="button" class="btn btn-danger">X</button>
+                <div class="news_img_card" data-newsimgid="{{$item->id}}">
+                    <button type="button" class="btn btn-danger" data-newsimgid="{{$item->id}}">X</button>
                     <img class="img-fluid" src="{{$item->news_url}}" alt="">
                     <input class="form-control" type="text" value="{{$item->sort}}">
                 </div>
@@ -50,7 +52,7 @@
 
         <div class="form-group">
             <label for="news_url">新增多張圖片組</label>
-            <input type="file" class="form-control" id="news_url" name="news_url[]" multiple required >
+            <input type="file" class="form-control" id="news_url" name="news_url[]" multiple required>
         </div>
 
         <div class="form-group">
@@ -82,6 +84,29 @@
     $(document).ready(function() {
     $('#example').DataTable();
     } );
+</script>
+
+<script>
+    $.ajaxSetup({
+        headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $('.news_img_card .btn-danger').click(function(){
+        var newsimgid = this.getAttribute('data-newsimgid');
+
+        $.ajax({
+                  url: "/home/ajax_delete_news_imgs",
+                  method: 'post',
+                  data: {
+                     newsimgid:newsimgid,
+                  },
+                  success: function(result){
+                     $(`.news_img_card[data-newsimgid=${newsimgid}]`).remove();
+                  }
+               });
+    });
 </script>
 
 @endsection

@@ -18,14 +18,12 @@ Route::get('/news/{id}', 'FrontController@news_detail');
 
 Route::get('/product', 'FrontController@product');
 
-// Route::get('/news', function () {
-//     return view('front/news');
-// });
 
-// Route::get('test', 'FrontController@test');
+
+
+
 
 Auth::routes();
-
 
 
 Route::group(['middleware' => ['auth'],"prefix" => '/home'], function () {
@@ -39,6 +37,10 @@ Route::group(['middleware' => ['auth'],"prefix" => '/home'], function () {
     Route::get('/news/edit/{id}', 'NewsController@edit');
     Route::post('/news/update/{id}', 'NewsController@update');
     Route::post('/news/delete/{id}', 'NewsController@delete');
+    
+    Route::post('ajax_delete_news_imgs', 'NewsController@ajax_delete_news_imgs');
+
+
 
     //product
     Route::get('/product', 'ProductController@index');
