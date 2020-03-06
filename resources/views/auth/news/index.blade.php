@@ -30,7 +30,7 @@
                 <td><img width="200" src="{{$item->img}}" alt=""></td>
                 <td>{{$item->title}}</td>
                 <td>{{$item->sort}}</td>
-                <td>{{$item->text}}</td>
+                <td>{!!$item->text!!}</td>
                 <td>
                     <a href="/home/news/edit/{{$item->id}}" class="btn btn-success btn-sm">修改</a>
                     <button class="btn btn-danger btn-sm" onclick="show_confirm({{$item->id}})">刪除</button>

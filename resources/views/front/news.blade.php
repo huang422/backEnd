@@ -21,7 +21,7 @@
                             {{$item->title}}
                         </h4>
                         <p class="mbr-text mbr-fonts-style display-7">
-                            {{$item->text}}
+                            {!!$item->text!!}
                         </p>
                     </div>
                     <div class="mbr-section-btn text-center">
@@ -34,52 +34,18 @@
 
             @endforeach
 
-
-            {{-- <div class="card p-3 col-12 col-md-6 col-lg-4">
-                <div class="card-wrapper">
-                    <div class="card-img">
-                        <img src="{{asset('assets/images/background2.jpg')}}" alt="Mobirise">
-                    </div>
-                    <div class="card-box">
-                        <h4 class="card-title mbr-fonts-style display-7">
-                            Mobile Friendly
-                        </h4>
-                        <p class="mbr-text mbr-fonts-style display-7">
-                            All sites you make with Mobirise are mobile-friendly. You don't have to create a special mobile version of your site.
-                        </p>
-                    </div>
-                    <div class="mbr-section-btn text-center">
-                        <a href="https://mobirise.co" class="btn btn-primary display-4">
-                            Learn More
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card p-3 col-12 col-md-6 col-lg-4">
-                <div class="card-wrapper">
-                    <div class="card-img">
-                        <img src="{{asset('assets/images/background3.jpg')}}" alt="Mobirise">
-                    </div>
-                    <div class="card-box">
-                        <h4 class="card-title mbr-fonts-style display-7">
-                            Unique Styles
-                        </h4>
-                        <p class="mbr-text mbr-fonts-style display-7">
-                            Mobirise offers many site blocks in several themes, and though these blocks are pre-made, they are flexible.
-                        </p>
-                    </div>
-                    <div class="mbr-section-btn text-center">
-                        <a href="https://mobirise.co" class="btn btn-primary display-4">
-                            Learn More
-                        </a>
-                    </div>
-                </div> --}}
-            </div>
-
-
         </div>
     </div>
 </section>
+
+@endsection
+
+@section('js')
+
+<script>
+    // 消除summernote樣式style
+    $('.card-box *').attr('style',' ');
+
+</script>
 
 @endsection

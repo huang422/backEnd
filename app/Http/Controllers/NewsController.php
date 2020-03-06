@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\News;
 use App\NewsImgs;
 use Illuminate\Http\Request;
@@ -15,10 +14,12 @@ class NewsController extends Controller
         return view('auth/news/index', compact('all_news'));
     }
 
+
     public function create()
     {
         return view('auth/news/create');
     }
+
 
     public function store(Request $request)
     {
@@ -30,11 +31,9 @@ class NewsController extends Controller
             $news_data['img'] = $path;
         }
 
-        $news_news = News::create($news_data);
+        $new_news = News::create($news_data);
 
         // 多張圖上傳
-
-
 
         if($request->hasFile('news_url'))
         {
@@ -45,10 +44,9 @@ class NewsController extends Controller
 
                 //新增資料進DB
                 $news_imgs = new NewsImgs;
-                $news_imgs->news_id = $news_news->id;
+                $news_imgs->news_id = $new_news->id;
                 $news_imgs->news_url = $path;
                 $news_imgs->save();
-
             }
         }
 
@@ -57,11 +55,8 @@ class NewsController extends Controller
 
     public function edit($id)
     {
-
         // $news = News::where('id','=','$id')->first();
-
         $news = News::find($id);
-
         return view('auth/news/edit', compact('news'));
     }
 
@@ -97,6 +92,7 @@ class NewsController extends Controller
 
     public function delete(Request $request, $id)
     {
+        //單張刪除
         $item = News::find($id);
 
         $old_image = $item->img;
@@ -104,6 +100,20 @@ class NewsController extends Controller
             File::delete(public_path().$old_image);
         }
         $item->delete();
+
+        //多張刪除
+        $news_imgs = NewsImgs::where('news_id',$id)->get();
+
+        foreach($news_imgs as $news_img){
+
+            $old_image = $news_img->news_url;
+
+            if(file_exists(public_path().$old_image)){
+            File::delete(public_path().$old_image);
+            }
+
+            $news_img->delete();
+        }
         return redirect('/home/news');
     }
 
@@ -143,5 +153,16 @@ class NewsController extends Controller
 
 
         return "delete success".$newsimgid;
+    }
+
+    public function ajax_post_sort(Request $request){
+
+        $news_img_id = $request->img_id;
+        $sort = $request->sort_value;
+
+        $img = NewsImgs::find($news_img_id);
+        $img->sort = $sort;
+        $img->save();
+        return "OK";
     }
 }
