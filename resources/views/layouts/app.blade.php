@@ -41,20 +41,24 @@
                             <a class="nav-link" href="/home/news">news</a>
                         </li>
 
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link" href="/home/product">product</a>
-                        </li>
+                        </li> --}}
 
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                下拉選單</span>
+                                產品管理</span>
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="">
-                                   12345
+                                <a class="dropdown-item" href="/home/productTypes">
+                                    產品類型管理
+                                </a>
+                                <a class="dropdown-item" href="/home/product">
+                                    產品管理
                                 </a>
                             </div>
+
                         </li>
 
                     </ul>

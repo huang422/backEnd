@@ -100,7 +100,11 @@
 
 @section('js')
 
+<script>
+    // 消除summernote樣式style
+    $('.card-box *').attr('style',' ');
 
+</script>
 
 @endsection
 

@@ -58,10 +58,64 @@
 <script>
     $(document).ready(function() {
         $('#text').summernote({
-            minHeight: 300,
+            height: 300,
+            lang: 'zh-TW',
+            callbacks: {
+                onImageUpload: function(files) {
+                    for(let i=0; i < files.length; i++) {
+                        $.upload(files[i]);
+                    }
+                },
+                onMediaDelete : function(target) {
+                    $.delete(target[0].getAttribute("src"));
+                }
+            },
         });
-    });
+
+        $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+        $.upload = function (file) {
+            let out = new FormData();
+            out.append('file', file, file.name);
+
+
+            $.ajax({
+                method: 'POST',
+                url: '/home/ajax_upload_img',
+                contentType: false,
+                cache: false,
+                processData: false,
+                data: out,
+                success: function (img) {
+                    $('#text').summernote('insertImage', img);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.error(textStatus + " " + errorThrown);
+                }
+            });
+        };
+
+        $.delete = function (file_link) {
+
+            $.ajax({
+                method: 'POST',
+                url: '/home/ajax_delete_img',
+                data: {file_link:file_link},
+                success: function (img) {
+                    console.log("delete:",img);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.error(textStatus + " " + errorThrown);
+                }
+            });
+        }
+   });
 </script>
+<script src="{{asset('js/summernote-zh-TW.js')}}"></script>
 
 @endsection
 

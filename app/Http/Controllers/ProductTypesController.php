@@ -1,56 +1,60 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Product;
+
+use App\ProductTypes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
-class ProductController extends Controller
+class ProductTypesController extends Controller
 {
-    public function index(){
-        $all_product = Product::all();
-        return view('auth/product/index',compact('all_product'));
+    public function index()
+    {
+        $all_productTypes = ProductTypes::all();
+        return view('auth/productTypes/index', compact('all_productTypes'));
     }
 
-    public function create(){
-        return view('auth/product/create');
+    public function create()
+    {
+        return view('auth/productTypes/create');
     }
+
 
     public function store(Request $request)
     {
-        $product_data = $request->all();
+        $productTypes_data = $request->all();
 
 
-        Product::create($product_data);
-        return redirect('/home/product');
+        ProductTypes::create($productTypes_data);
+        return redirect('/home/productTypes');
     }
 
     public function edit($id)
     {
 
-        $product = Product::find($id);
-        return view('auth/product/edit', compact('product'));
+        $productTypes = ProductTypes::find($id);
+        return view('auth/productTypes/edit', compact('productTypes'));
     }
 
     public function update(Request $request, $id)
     {
 
-        $productTypes = Product::find($id);
+        $productTypes = ProductTypes::find($id);
         $productTypes->title = $request->title;
         $productTypes->sort = $request->sort;
         $productTypes->save();
 
-        Product::find($id)->update($request->all());
+        ProductTypes::find($id)->update($request->all());
 
 
-        return redirect('/home/product');
+        return redirect('/home/productTypes');
     }
 
     public function delete(Request $request, $id)
     {
-        $item = Product::find($id);
+        $item = ProductTypes::find($id);
         $item->delete();
-        return redirect('/home/product');
+        return redirect('/home/productTypes');
     }
 
 

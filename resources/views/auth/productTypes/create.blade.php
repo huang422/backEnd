@@ -8,32 +8,22 @@
 @section('content')
 
 
-<form method="post" action="/home/product/store" enctype="multipart/form-data">
+<form method="post" action="/home/productTypes/store" enctype="multipart/form-data">
     @csrf
     <div class="container">
 
         <h1>新增產品類型</h1>
 
-        <div class="form-group">
-            <label for="types_id">產品名稱</label>
-            <input type="text" class="form-control" id="types_id" name="types_id">
-          </div>
-
-         <div class="form-group">
+         {{-- <div class="form-group">
             <label for="img">IMG</label>
             <input type="file" class="form-control" id="img" name="img" required>
-          </div>
+          </div> --}}
 
-
+          
 
           <div class="form-group">
             <label for="title">產品名稱</label>
             <input type="text" class="form-control" id="title" name="title">
-          </div>
-
-          <div class="form-group">
-            <label for="text">text</label>
-            <input type="text" class="form-control" id="text" name="text">
           </div>
 
           <div class="form-group">

@@ -16,6 +16,8 @@ Route::get('/', 'FrontController@index');
 Route::get('/news', 'FrontController@news');
 Route::get('/news/{id}', 'FrontController@news_detail');
 
+Route::get('/productTypes', 'FrontController@productTypes');
+
 Route::get('/product', 'FrontController@product');
 
 
@@ -41,8 +43,11 @@ Route::group(['middleware' => ['auth'],"prefix" => '/home'], function () {
     Route::post('ajax_delete_news_imgs', 'NewsController@ajax_delete_news_imgs');
     Route::post('ajax_post_sort', 'NewsController@ajax_post_sort');
 
+    Route::post('/ajax_upload_img','UploadImgController@ajax_upload_img');
+    Route::post('/ajax_delete_img','UploadImgController@ajax_delete_img');
 
-    
+
+
 
     //product
     Route::get('/product', 'ProductController@index');
@@ -51,5 +56,13 @@ Route::group(['middleware' => ['auth'],"prefix" => '/home'], function () {
     Route::get('/product/edit/{id}', 'ProductController@edit');
     Route::post('/product/update/{id}', 'ProductController@update');
     Route::post('/product/delete/{id}', 'ProductController@delete');
+
+    //productTypes
+    Route::get('/productTypes', 'ProductTypesController@index');
+    Route::get('/productTypes/create', 'ProductTypesController@create');
+    Route::post('/productTypes/store', 'ProductTypesController@store');
+    Route::get('/productTypes/edit/{id}', 'ProductTypesController@edit');
+    Route::post('/productTypes/update/{id}', 'ProductTypesController@update');
+    Route::post('/productTypes/delete/{id}', 'ProductTypesController@delete');
 
 });

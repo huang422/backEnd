@@ -17,7 +17,7 @@
 
 @section('content')
 
-<form method="post" action="/home/product/update/{{$product->id}}" enctype="multipart/form-data">
+<form method="post" action="/home/productTypes/update/{{$productTypes->id}}" enctype="multipart/form-data">
     @csrf
     <div class="container">
 
@@ -57,26 +57,16 @@
             <input type="file" class="form-control" id="news_url" name="news_url[]" multiple>
         </div> --}}
 
-        <div class="form-group">
-            <label for="types_id">types_id</label>
-            <input type="text" class="form-control" id="types_id" name="types_id" value="{{$product->types_id}}">
-        </div>
-
 
 
         <div class="form-group">
-            <label for="title">產品名稱</label>
-            <input type="text" class="form-control" id="title" name="title" value="{{$product->title}}">
+            <label for="title">TITLE</label>
+            <input type="text" class="form-control" id="title" name="title" value="{{$productTypes->title}}">
         </div>
 
         <div class="form-group">
-            <label for="text">text</label>
-            <input type="number" min="0" class="form-control" id="text" name="text" value="{{$product->text}}">
-        </div>
-
-        <div class="form-group">
-            <label for="sort">sort</label>
-            <input type="number" min="0" class="form-control" id="sort" name="sort" value="{{$product->sort}}">
+            <label for="sort">SORT</label>
+            <input type="number" min="0" class="form-control" id="sort" name="sort" value="{{$productTypes->sort}}">
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>

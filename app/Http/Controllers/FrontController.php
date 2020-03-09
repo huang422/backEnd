@@ -24,6 +24,11 @@ class FrontController extends Controller
         return view('front/news_detail',compact('news_data'));
     }
 
+    public function productTypes(){
+        // $news_data = News::orderBy('sort','desc')->get();
+        return view('front//productTypes');
+    }
+
 
 
 
