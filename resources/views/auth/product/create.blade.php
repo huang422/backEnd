@@ -12,11 +12,17 @@
     @csrf
     <div class="container">
 
-        <h1>新增產品類型</h1>
+        <h1>新增產品</h1>
 
         <div class="form-group">
-            <label for="types_id">產品名稱</label>
-            <input type="text" class="form-control" id="types_id" name="types_id">
+            <label for="types_id">產品類型</label>
+            <select class="form-control" id="types_id" name="types_id">
+                @foreach ($productTypes as $item)
+
+                    <option>{{$item->title}}</option>
+
+                @endforeach
+            </select>
           </div>
 
          <div class="form-group">
@@ -24,7 +30,10 @@
             <input type="file" class="form-control" id="img" name="img" required>
           </div>
 
-
+          {{-- <div class="form-group">
+            <label for="news_url">多張IMG</label>
+            <input type="file" class="form-control" id="news_url" name="news_url[]" multiple>
+          </div> --}}
 
           <div class="form-group">
             <label for="title">產品名稱</label>

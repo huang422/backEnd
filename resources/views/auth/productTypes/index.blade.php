@@ -17,11 +17,11 @@
         <thead>
             <tr>
                 {{-- <th>img</th> --}}
-
                 <th>產品類型</th>
                 <th>sort</th>
-
                 <th width="130">功能</th>
+                <th></th>
+
             </tr>
         </thead>
         <tbody>
@@ -29,7 +29,6 @@
 
             <tr>
                 {{-- <td><img width="200" src="{{$item->img}}" alt=""></td> --}}
-                
                 <td>{{$item->title}}</td>
                 <td>{{$item->sort}}</td>
 
@@ -41,6 +40,7 @@
                         @csrf
                     </form>
                 </td>
+                <td></td>
             </tr>
 
             @endforeach

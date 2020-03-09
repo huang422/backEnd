@@ -2,54 +2,121 @@
 
 namespace App\Http\Controllers;
 use App\Product;
+use App\ProductTypes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $all_product = Product::all();
-        return view('auth/product/index',compact('all_product'));
+        $types = ProductTypes::all();
+        return view('auth/product/index', compact('all_product','types'));
     }
 
-    public function create(){
-        return view('auth/product/create');
+
+    public function create()
+    {
+        $productTypes = ProductTypes::all();
+        return view('auth/product/create',compact('productTypes'));
     }
+
 
     public function store(Request $request)
     {
+        //單張圖上傳
         $product_data = $request->all();
-
+        if ($request->hasFile('img')) {
+            $file = $request->file('img');
+            $path = $this->fileUpload($file, 'product');
+            $product_data['img'] = $path;
+        }
 
         Product::create($product_data);
+
+        // 多張圖上傳
+
+        // if($request->hasFile('product_url'))
+        // {
+        //     $files = $request->file('product_url');
+        //     foreach ($files as $file) {
+        //         //上傳圖片
+        //         $path = $this->fileUpload($file,'product');
+
+        //         //新增資料進DB
+        //         $product_imgs = new productImgs;
+        //         $product_imgs->product_id = $new_product->id;
+        //         $product_imgs->product_url = $path;
+        //         $product_imgs->save();
+        //     }
+        // }
+
         return redirect('/home/product');
     }
 
     public function edit($id)
     {
-
+        // $product = product::where('id','=','$id')->first();
+        $productTypes = ProductTypes::all();
         $product = Product::find($id);
-        return view('auth/product/edit', compact('product'));
+        return view('auth/product/edit', compact('productTypes','product'));
     }
 
     public function update(Request $request, $id)
     {
 
-        $productTypes = Product::find($id);
-        $productTypes->title = $request->title;
-        $productTypes->sort = $request->sort;
-        $productTypes->save();
+        // $product = product::find($id);
+        // $product->img = $request->img;
+        // $product->title = $request->title;
+        // $product->sort = $request->sort;
+        // $product->text = $request->text;
+        // $product->save();
 
-        Product::find($id)->update($request->all());
+        // product::find($id)->update($request->all());
 
+        $item = Product::find($id);
+        $requset_data = $request->all();
+        if ($request->hasFile('img')) {
 
+            //刪除舊圖
+            $old_img = $item->img;
+            File::delete(public_path() . $old_img);
+
+            //上傳新圖
+            $file = $request->file('img');
+            $path = $this->fileUpload($file, 'product');
+            $requset_data['img'] = $path;
+        }
+
+        $item->update($requset_data);
         return redirect('/home/product');
     }
 
     public function delete(Request $request, $id)
     {
+        //單張刪除
         $item = Product::find($id);
+
+        $old_image = $item->img;
+        if(file_exists(public_path().$old_image)){
+            File::delete(public_path().$old_image);
+        }
         $item->delete();
+
+        //多張刪除
+        // $product_imgs = productImgs::where('product_id',$id)->get();
+
+        // foreach($product_imgs as $product_img){
+
+        //     $old_image = $product_img->product_url;
+
+        //     if(file_exists(public_path().$old_image)){
+        //     File::delete(public_path().$old_image);
+        //     }
+
+        //     $product_img->delete();
+        // }
         return redirect('/home/product');
     }
 

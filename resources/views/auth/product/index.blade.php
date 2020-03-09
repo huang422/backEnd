@@ -16,30 +16,33 @@
     <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
-                {{-- <th>img</th> --}}
 
-                <th>types_id</th>
+                <th>產品類型</th>
                 <th>img</th>
                 <th>title</th>
                 <th>text</th>
                 <th>sort</th>
-
-
                 <th width="130">功能</th>
             </tr>
         </thead>
         <tbody>
+
+
+
+
+
             @foreach ($all_product as $item)
 
             <tr>
-                {{-- <td><img width="200" src="{{$item->img}}" alt=""></td> --}}
+                {{-- @foreach ($types as $item)
+                <td>{{$item->title}}</td>
+                @endforeach --}}
 
                 <td>{{$item->types_id}}</td>
-                <td>{{$item->img}}</td>
+                <td><img width="200" src="{{$item->img}}" alt=""></td>
                 <td>{{$item->title}}</td>
                 <td>{{$item->text}}</td>
                 <td>{{$item->sort}}</td>
-
 
                 <td>
                     <a href="/home/product/edit/{{$item->id}}" class="btn btn-success btn-sm">修改</a>

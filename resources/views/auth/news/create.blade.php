@@ -118,5 +118,3 @@
 <script src="{{asset('js/summernote-zh-TW.js')}}"></script>
 
 @endsection
-
-

@@ -19,10 +19,10 @@
             <input type="file" class="form-control" id="img" name="img" required>
           </div> --}}
 
-          
+
 
           <div class="form-group">
-            <label for="title">產品名稱</label>
+            <label for="title">產品類型</label>
             <input type="text" class="form-control" id="title" name="title">
           </div>
 
