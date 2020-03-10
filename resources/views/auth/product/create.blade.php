@@ -19,7 +19,7 @@
             <select class="form-control" id="types_id" name="types_id">
                 @foreach ($productTypes as $item)
 
-                    <option>{{$item->title}}</option>
+                    <option value="{{$item->id}}">{{$item->title}}</option>
 
                 @endforeach
             </select>

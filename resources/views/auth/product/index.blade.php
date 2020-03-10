@@ -38,7 +38,7 @@
                 <td>{{$item->title}}</td>
                 @endforeach --}}
 
-                <td>{{$item->types_id}}</td>
+                <td>{{$item->product_types->title}}</td>
                 <td><img width="200" src="{{$item->img}}" alt=""></td>
                 <td>{{$item->title}}</td>
                 <td>{{$item->text}}</td>

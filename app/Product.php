@@ -12,7 +12,7 @@ class Product extends Model
         'types_id', 'img', 'title', 'text', 'sort',
     ];
 
-    public function product_imgs(){
-        return $this->belongsTo('App\ProductTypes','types_id');
+    public function product_types(){
+        return $this->belongsTo('App\ProductTypes','types_id'); //(model, foreign_key,primary_key)
     }
 }

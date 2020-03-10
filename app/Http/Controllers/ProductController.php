@@ -11,8 +11,7 @@ class ProductController extends Controller
     public function index()
     {
         $all_product = Product::all();
-        $types = ProductTypes::all();
-        return view('auth/product/index', compact('all_product','types'));
+        return view('auth/product/index', compact('all_product'));
     }
 
 
