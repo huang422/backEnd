@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use DB;
 use App\News;
+use App\Contact;
 use App\Product;
 use Illuminate\Http\Request;
 
@@ -21,27 +22,19 @@ class FrontController extends Controller
     public function news_detail($id){
 
         $news_data = News::with('news_imgs')->find($id);
-
         return view('front/news_detail',compact('news_data'));
     }
-
-    // public function productTypes(){
-    //     // $news_data = News::orderBy('sort','desc')->get();
-    //     return view('front/productTypes');
-    // }
-
 
     public function product(){
         $product_data = Product::orderBy('sort','desc')->get();
         return view('front/product',compact('product_data'));
     }
 
-
-
     public function contact(){
-
         return view('front/contact');
     }
+
+
 
     public function contact_login(Request $request){
 
@@ -52,9 +45,8 @@ class FrontController extends Controller
             recaptchaFieldName() => recaptchaRuleName(),
         ]);
 
+        $contact_data = $request->all();
+        Contact::create($contact_data);
         return redirect('/contact');
     }
-
-
-
 }

@@ -16,13 +16,10 @@ Route::get('/', 'FrontController@index');
 Route::get('/news', 'FrontController@news');
 Route::get('/news/{id}', 'FrontController@news_detail');
 
-Route::get('/productTypes', 'FrontController@productTypes');
-
 Route::get('/product', 'FrontController@product');
 
 Route::get('/contact', 'FrontController@contact');
 Route::post('/contact_login', 'FrontController@contact_login');
-
 
 
 
@@ -52,7 +49,6 @@ Route::group(['middleware' => ['auth'],"prefix" => '/home'], function () {
 
 
 
-
     //product
     Route::get('/product', 'ProductController@index');
     Route::get('/product/create', 'ProductController@create');
@@ -71,10 +67,6 @@ Route::group(['middleware' => ['auth'],"prefix" => '/home'], function () {
 
     //contact
     Route::get('/contact', 'ContactController@index');
-    Route::get('/contact/create', 'ContactController@create');
-    Route::post('/contact/store', 'ContactController@store');
-    Route::get('/contact/edit/{id}', 'ContactController@edit');
-    Route::post('/contact/update/{id}', 'ContactController@update');
     Route::post('/contact/delete/{id}', 'ContactController@delete');
 
 });

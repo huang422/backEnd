@@ -10,8 +10,7 @@
 {{-- <form method="post" action="/home/news/store">
     @csrf --}}
 <div class="container">
-    <a href="/home/contact/create" class="btn btn-success">新增產品</a>
-    <hr>
+
 
     <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
@@ -29,18 +28,17 @@
 
 
 
-            {{-- @foreach ($all_contact as $item)
+            @foreach ($all_contact as $item)
 
             <tr>
 
-                <td>{{$item->contact_types->title}}</td>
-                <td><img width="200" src="{{$item->img}}" alt=""></td>
-                <td>{{$item->title}}</td>
-                <td>{{$item->text}}</td>
-                <td>{{$item->sort}}</td>
+                <td>{{$item->name}}</td>
+                <td>{{$item->email}}</td>
+                <td>{{$item->phone}}</td>
+                <td>{{$item->message}}</td>
 
                 <td>
-                    <a href="/home/contact/edit/{{$item->id}}" class="btn btn-success btn-sm">修改</a>
+                    {{-- <a href="/home/contact/edit/{{$item->id}}" class="btn btn-success btn-sm">修改</a> --}}
                     <button class="btn btn-danger btn-sm" onclick="show_confirm({{$item->id}})">刪除</button>
                     <form id="delete-form-{{$item->id}}" action="/home/contact/delete/{{$item->id}}" method="POST"
                         style="display: none;">
@@ -49,7 +47,7 @@
                 </td>
             </tr>
 
-            @endforeach --}}
+            @endforeach
 
 
         </tbody>
