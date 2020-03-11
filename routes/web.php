@@ -20,6 +20,10 @@ Route::get('/productTypes', 'FrontController@productTypes');
 
 Route::get('/product', 'FrontController@product');
 
+Route::get('/contact', 'FrontController@contact');
+Route::post('/contact_login', 'FrontController@contact_login');
+
+
 
 
 
@@ -64,5 +68,13 @@ Route::group(['middleware' => ['auth'],"prefix" => '/home'], function () {
     Route::get('/productTypes/edit/{id}', 'ProductTypesController@edit');
     Route::post('/productTypes/update/{id}', 'ProductTypesController@update');
     Route::post('/productTypes/delete/{id}', 'ProductTypesController@delete');
+
+    //contact
+    Route::get('/contact', 'ContactController@index');
+    Route::get('/contact/create', 'ContactController@create');
+    Route::post('/contact/store', 'ContactController@store');
+    Route::get('/contact/edit/{id}', 'ContactController@edit');
+    Route::post('/contact/update/{id}', 'ContactController@update');
+    Route::post('/contact/delete/{id}', 'ContactController@delete');
 
 });

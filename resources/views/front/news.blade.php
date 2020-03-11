@@ -3,7 +3,7 @@
 @section('content')
 
 
-<section class="engine"><a href="https://mobirise.info/x">css templates</a></section><section class="features3 cid-rRF3umTBWU pt-5 mt-5" id="features3-7">
+<section class="engine"><a href="">css templates</a></section><section class="features3 cid-rRF3umTBWU pt-5 mt-5" id="features3-7">
 
 
     <div class="container">

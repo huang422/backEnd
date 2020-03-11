@@ -18,7 +18,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-    
+
     {!! ReCaptcha::htmlScriptTagJsApi() !!}
 
     @yield('css')
@@ -46,9 +46,9 @@
                             <a class="nav-link" href="/home/news">news</a>
                         </li>
 
-                        {{-- <li class="nav-item">
-                            <a class="nav-link" href="/home/product">product</a>
-                        </li> --}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/home/contact">聯絡我們</a>
+                        </li>
 
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

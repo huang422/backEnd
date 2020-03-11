@@ -1,5 +1,3 @@
-
-
 @extends('layouts/nav')
 
 @section('content')
@@ -19,16 +17,14 @@
                 <h2 class="align-left pb-3 mbr-fonts-style display-1">
                     Our Shop
                 </h2>
-
             </div>
             <!--Card-1-->
-            @foreach ($all_product as $item)
+            @foreach ($product_data as $item)
 
-            @endforeach
             <div class="card col-12 col-md-6 p-3 col-lg-4">
                 <div class="card-wrapper">
                     <div class="card-img">
-                    <img src="{{$item->img}}" alt="Mobirise">
+                        <img src="{{$item->img}}" alt="Mobirise">
                     </div>
                     <div class="card-box">
                         <h4 class="card-title mbr-fonts-style display-5">
@@ -46,6 +42,9 @@
                     </div>
                 </div>
             </div>
+
+            @endforeach
+
         </div>
     </div>
 </section>
@@ -57,7 +56,3 @@
 
 
 @endsection
-
-
-
-
