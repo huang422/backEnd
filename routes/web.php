@@ -21,6 +21,11 @@ Route::get('/product', 'FrontController@product');
 Route::get('/contact', 'FrontController@contact');
 Route::post('/contact_login', 'FrontController@contact_login');
 
+Route::get('/cart', 'FrontController@cart');
+
+Route::get('/add_cart', 'FrontController@add_cart');
+Route::get('/total_cart', 'FrontController@total_cart');
+
 
 
 
