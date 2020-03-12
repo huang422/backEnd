@@ -20,8 +20,10 @@ class CreateProductsTable extends Migration
             $table->string('text')->nullable();
             $table->integer('sort')->default(0);
             $table->integer('types_id');
+            $table->string('price');
             $table->timestamps();
         });
+
     }
 
     /**

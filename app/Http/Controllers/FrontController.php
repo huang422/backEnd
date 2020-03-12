@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Contact;
 use App\News;
+use App\Contact;
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FrontController extends Controller
 {
@@ -53,31 +54,35 @@ class FrontController extends Controller
         return redirect('/contact');
     }
 
-    public function cart()
+    public function product_detail($productId)
     {
-        return view('front/cart');
+        $Product = Product::find($productId);
+        return view('front/product_detail',compact('Product'));
     }
 
-    public function add_cart()
+    public function add_cart($productId)
     {
         $Product = Product::find($productId); // assuming you have a Product model with id, name, description & price
-        $rowId = 456; // generate a unique() row ID
-        $userID = 2; // the user ID to bind the cart contents
+        $rowId = $productId; // generate a unique() row ID
+        $userID = Auth::user()->id; // the user ID to bind the cart contents
 
-// add the product to cart
+        // add the product to cart
         \Cart::session($userID)->add(array(
             'id' => $rowId,
-            'name' => $Product->name,
+            'name' => $Product->title,
             'price' => $Product->price,
-            'quantity' => 4,
+            'quantity' => 1,
             'attributes' => array(),
             'associatedModel' => $Product,
         ));
-
+        return redirect('/cart');
     }
 
     public function total_cart()
     {
-
+        $userID = Auth::user()->id;
+        $items = \Cart::session($userID)->getContent();
+        dd($items);
+        return view('front/cart',compact('items'));
     }
 }

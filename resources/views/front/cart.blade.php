@@ -3,36 +3,109 @@
 @section('css')
 
 <style>
-    .product-name {
-        font-size: 40px;
-        font-weight: 400;
-        line-height: 48px;
+    .Cart {
+        margin: 50px auto;
     }
 
-    .product-card .color {
+    .Cart__header {
+        display: grid;
+        grid-template-columns: 3fr 1fr 1fr 1fr 1fr;
+        grid-gap: 2px;
+        margin-bottom: 2px;
+    }
 
-        padding: 10px 20px;
-        width: 160px;
-        min-height: 58px;
-        height: 100%;
-        font-size: 16px;
-        line-height: 20px;
-        color: #757575;
+    .Cart__headerGrid {
         text-align: center;
-        border: 1px solid #eee;
-        background-color: #fff;
-        -webkit-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        transition: opacity, border .2s linear;
-        cursor: pointer;
-
+        background: #f3f3f3;
     }
 
-    .product-card .color.active {
-        color: #424242;
-        border-color: #ff6700;
-        transition: opacity, border .2s linear;
+    .Cart__product {
+        display: grid;
+        grid-template-columns: 2fr 7fr 3fr 3fr 3fr 3fr;
+        grid-gap: 2px;
+        margin-bottom: 2px;
+        height: 90px;
+    }
+
+    .Cart__productGrid {
+        padding: 5px;
+    }
+
+    .Cart__productImg {
+        background-image: url(https://fakeimg.pl/640x480/c0cfe8/?text=Img);
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .Cart__productTitle {
+        overflow: hidden;
+        line-height: 25px;
+    }
+
+    .Cart__productPrice,
+    .Cart__productQuantity,
+    .Cart__productTotal,
+    .Cart__productDel {
+        text-align: center;
+        line-height: 60px;
+    }
+
+    @media screen and (max-width: 820px) {
+        .Cart__header {
+            display: none;
+        }
+
+        .Cart__product {
+            box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.5);
+            margin-bottom: 10px;
+            grid-template-rows: 1fr 1fr;
+            grid-template-columns: 2fr 2fr 2fr 2fr 2fr 2fr 1fr;
+            grid-template-areas:
+                "img title title title title title del"
+                "img price price quantity total total del";
+        }
+
+        .Cart__productImg {
+            grid-area: img;
+        }
+
+        .Cart__productTitle {
+            grid-area: title;
+        }
+
+        .Cart__productPrice,
+        .Cart__productQuantity,
+        .Cart__productTotal,
+        .Cart__productDel {
+            line-height: initial;
+        }
+
+        .Cart__productPrice {
+            grid-area: price;
+            text-align: right;
+        }
+
+        .Cart__productQuantity {
+            grid-area: quantity;
+            text-align: left;
+        }
+
+        .Cart__productQuantity::before {
+            content: "x";
+        }
+
+        .Cart__productTotal {
+            grid-area: total;
+            text-align: right;
+            color: red;
+        }
+
+        .Cart__productDel {
+            grid-area: del;
+            line-height: 60px;
+            background: #ffc0cb26;
+        }
     }
 </style>
 
@@ -42,74 +115,37 @@
 
 
 <section class="features3 cid-rRF3umTBWU pt-5 mt-5" id="features3-7">
-
-
     <div class="container">
-        <div class="row">
-            <div class="col-6">
-
+        <div class="Cart">
+            <div class="Cart__header">
+                <div class="Cart__headerGrid">商品</div>
+                <div class="Cart__headerGrid">單價</div>
+                <div class="Cart__headerGrid">數量</div>
+                <div class="Cart__headerGrid">小計</div>
+                <div class="Cart__headerGrid">刪除</div>
             </div>
-            <div class="col-6">
-                <div class="product-name mb-3">
-                    <span> Redmi Note 8 Pro</span>
-                </div>
-                <div class="product-tip mb-3">
-                    <span>6GB+64GB, 冰翡翠</span><br>
-                    <span>NT$6,599</span>
-                </div>
-                <div class="product-capacity mb-3">
-                    <div class="product-card">
-                        <div class="row">
-                            <div class="col-12">容量</div>
-                            <div class="col-4">
-                                <div class="color" data-capacity="6GB+64GB">6GB+64GB</div>
-                            </div>
-                            <div class="col-4">
-                                <div class="color" data-capacity="6GB+128GB">6GB+128GB</div>
-                            </div>
 
+            {{-- @foreach ($items as $item)
+            {{$item}}
+            @endforeach --}}
 
-                        </div>
-                    </div>
-                </div>
-                <div class="product-color mb-3">
-                    <div class="product-card">
-                        <div class="row">
-                            <div class="col-12">顏色</div>
-                            <div class="col-4">
-                                <div class="color" data-color="紅">紅</div>
-                            </div>
-                            <div class="col-4">
-                                <div class="color" data-color="黃">黃</div>
-                            </div>
-                            <div class="col-4">
-                                <div class="color" data-color="綠">綠</div>
-                            </div>
-                            <div class="col-4">
-                                <div class="color" data-color="藍">藍</div>
-                            </div>
+            @foreach ($items as $item)
 
-                        </div>
-                    </div>
+            <div class="Cart__product">
+                <div class="Cart__productGrid Cart__productImg"></div>
+                <div class="Cart__productGrid Cart__productTitle">
+                    {{$item->name}}
                 </div>
-                <div class="product-qty mb-3">
-                    <div>數量</div>
-                    <a id="minus" href=""> - </a>
-                    <input type="number" value="1" id="qty" min="0">
-                    <a id="plus" href=""> + </a>
-                </div>
-                <div class="product-tatal mb-3">
-                    <span> Redmi Note 8 Pro</span>
-                    <span>冰翡翠</span>
-                    <span>6GB+64GB</span> * <span>1</span>
-                    <span>NT$6,599</span>
-                </div>
-                <input type="text" name="capacity" id="capacity" value="">
-                <input type="text" name="color" id="color" value="">
-                <button>立即購買</button>
-
+                <div class="Cart__productGrid Cart__productPrice">${{$item->price}}</div>
+                <div class="Cart__productGrid Cart__productQuantity">{{$item->quantity}}</div>
+                <div class="Cart__productGrid Cart__productTotal">${{$item->price * $item->quantity}}</div>
+                <div class="Cart__productGrid Cart__productDel">&times;</div>
             </div>
+
+            @endforeach
+
         </div>
+
     </div>
 </section>
 
@@ -118,40 +154,7 @@
 @section('js')
 
 <script>
-    $('.product-color .product-card .color').click(function () {
 
-        $('*').removeClass('active');
-        $(this).addClass('active');
-        $('#color').attr('value',`${$(this).attr('data-color')}`);
-
-    });
-
-    $('.product-capacity .product-card .color').click(function () {
-
-        $('*').removeClass('active');
-        $(this).addClass('active');
-        $('#capacity').attr('value',`${$(this).attr('data-capacity')}`);
-
-    });
-
-    $(function(){
-
-        var valueElement = $('#qty');
-        function incrementValue(e){
-            
-            //get now value
-            var now_number = $('#qty').val();
-
-            //add increment value
-            var new_number = Math.max(e.data.increment + parseInt(now_number));
-            $('#qty').val(new_number);
-
-            return false;
-        }
-
-        $('#plus').bind('click', {increment: 1}, incrementValue);
-        $('#minus').bind('click', {increment: -1}, incrementValue);
-    });
 
 </script>
 

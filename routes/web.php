@@ -16,19 +16,19 @@ Route::get('/', 'FrontController@index');
 Route::get('/news', 'FrontController@news');
 Route::get('/news/{id}', 'FrontController@news_detail');
 
-Route::get('/product', 'FrontController@product');
-
 Route::get('/contact', 'FrontController@contact');
 Route::post('/contact_login', 'FrontController@contact_login');
 
-Route::get('/cart', 'FrontController@cart');
+Route::get('/product', 'FrontController@product');
 
-Route::get('/add_cart', 'FrontController@add_cart');
-Route::get('/total_cart', 'FrontController@total_cart');
+Route::get('/product/{product_id}', 'FrontController@product_detail');
+
+Route::post('/add_cart/{product_id}', 'FrontController@add_cart');
+Route::get('/cart', 'FrontController@total_cart');
 
 
 
-
+ 
 
 
 Auth::routes();
