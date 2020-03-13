@@ -75,6 +75,7 @@ class FrontController extends Controller
             'attributes' => array(),
             'associatedModel' => $Product,
         ));
+
         return redirect('/cart');
     }
 
@@ -82,7 +83,7 @@ class FrontController extends Controller
     {
         $userID = Auth::user()->id;
         $items = \Cart::session($userID)->getContent();
-        dd($items);
         return view('front/cart',compact('items'));
     }
+
 }

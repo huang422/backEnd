@@ -51,8 +51,9 @@
                 <div class="product-card">
 
                     <div class="product-info mb-3">
-                        {{-- <div class="title">{{$Product->title}}</div> --}}
-                        <div class="title">iphone</div>
+
+                        <div class="title">{{$Product->title}}</div>
+                        {{-- <div class="title">iphone</div> --}}
                         <div class="sub-title">6GB+64GB, 冰翡翠</div>
                         <div class="price">NT$6,599</div>
                     </div>
@@ -89,7 +90,7 @@
                     </div>
                 </div>
 
-                <form action="'/add_cart/{product_id}" method="POST">
+                <form action="/add_cart/{{$Product->id}}" method="POST">
                     @csrf
                     <div class="product-qty mb-3">
                         <div>數量</div>
@@ -101,8 +102,8 @@
                         <span> Redmi Note 8 Pro</span>
                         <span>冰翡翠</span>
                         <span>6GB+64GB</span> * <span>1</span>
-                        <span>NT$5999</span>
-                        {{-- <span>NT${{$Product->price}}</span> --}}
+                        {{-- <span>NT$5999</span> --}}
+                        <span>NT${{$Product->price}}</span>
                     </div>
                     <input type="text" name="capacity" id="capacity" value="" hidden>
                     <input type="text" name="color" id="color" value="" hidden>

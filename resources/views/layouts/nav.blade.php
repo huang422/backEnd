@@ -77,7 +77,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link link text-white display-4" href="/product/{product_id}">
+                    <a class="nav-link link text-white display-4" href="">
                         <span class="mbri-search mbr-iconfont mbr-iconfont-btn"></span>
                         product_detail
                     </a>

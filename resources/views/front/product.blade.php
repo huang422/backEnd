@@ -35,7 +35,7 @@
                         </p>
                         <!--Btn-->
                         <div class="mbr-section-btn align-left">
-                            <a href="" class="btn btn-warning-outline display-4">
+                            <a href="/product/{{$item->id}}" class="btn btn-warning-outline display-4">
                                 {{$item->product_types->types}}
                             </a>
                         </div>

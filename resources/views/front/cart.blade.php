@@ -125,10 +125,16 @@
                 <div class="Cart__headerGrid">刪除</div>
             </div>
 
-            {{-- @foreach ($items as $item)
-            {{$item}}
-            @endforeach --}}
-
+            {{-- <div class="Cart__product">
+                <div class="Cart__productGrid Cart__productImg"></div>
+                <div class="Cart__productGrid Cart__productTitle">
+                    111
+                </div>
+                <div class="Cart__productGrid Cart__productPrice"></div>
+                <div class="Cart__productGrid Cart__productQuantity"></div>
+                <div class="Cart__productGrid Cart__productTotal"></div>
+                <div class="Cart__productGrid Cart__productDel">&times;</div>
+            </div> --}}
             @foreach ($items as $item)
 
             <div class="Cart__product">
