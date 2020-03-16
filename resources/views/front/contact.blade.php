@@ -21,7 +21,7 @@
             <div class="media-container-column col-lg-8" data-form-type="formoid">
 
                 <!---Formbuilder Form--->
-                <form action="/contact_login" method="POST" class="mbr-form form-with-styler"
+                <form action="/contact_store" method="POST" class="mbr-form form-with-styler"
                     data-form-title="Mobirise Form"><input type="hidden" name="email" data-form-email="true"
                         value="44eXahKmaJ7sIIt5IGe2WBE4QltlQC1JRce1/HPaxiXsXBzZb9O2pETrLm5Jrr35Qsg10YqM7KT6zKO/clseqQpijC6/uwqVrJ8J0TF7WIjRS80sJLDKuU4dVsP6qz01">
                     @csrf

@@ -76,12 +76,7 @@
                         Contact
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link link text-white display-4" href="">
-                        <span class="mbri-search mbr-iconfont mbr-iconfont-btn"></span>
-                        product_detail
-                    </a>
-                </li>
+                
             </ul>
             <div class="navbar-buttons mbr-section-btn">
                 <a class="btn btn-sm btn-primary display-4" href="https://mobirise.com">

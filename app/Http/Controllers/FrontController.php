@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\News;
 use App\Contact;
 use App\Product;
+use App\Mail\OrderShipped;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class FrontController extends Controller
 {
@@ -39,7 +41,7 @@ class FrontController extends Controller
         return view('front/contact');
     }
 
-    public function contact_login(Request $request)
+    public function contact_store(Request $request)
     {
 
         $request->validate([
@@ -49,8 +51,10 @@ class FrontController extends Controller
             recaptchaFieldName() => recaptchaRuleName(),
         ]);
 
+        //store
         $contact_data = $request->all();
-        Contact::create($contact_data);
+        $content = Contact::create($contact_data);
+        Mail::to('huang1473690@gmail.com')->send(new OrderShipped($content)); //寄信
         return redirect('/contact');
     }
 

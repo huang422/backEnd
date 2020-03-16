@@ -17,7 +17,7 @@ Route::get('/news', 'FrontController@news');
 Route::get('/news/{id}', 'FrontController@news_detail');
 
 Route::get('/contact', 'FrontController@contact');
-Route::post('/contact_login', 'FrontController@contact_login');
+Route::post('/contact_store', 'FrontController@contact_store');
 
 Route::get('/product', 'FrontController@product');
 
@@ -28,7 +28,7 @@ Route::get('/cart', 'FrontController@total_cart');
 
 
 
- 
+
 
 
 Auth::routes();
