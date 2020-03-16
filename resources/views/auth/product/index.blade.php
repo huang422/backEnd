@@ -22,6 +22,7 @@
                 <th>title</th>
                 <th>text</th>
                 <th>sort</th>
+                <th>price</th>
                 <th width="130">功能</th>
             </tr>
         </thead>
@@ -34,12 +35,13 @@
             @foreach ($all_product as $item)
 
             <tr>
-                
+
                 <td>{{$item->product_types->title}}</td>
                 <td><img width="200" src="{{$item->img}}" alt=""></td>
                 <td>{{$item->title}}</td>
                 <td>{{$item->text}}</td>
                 <td>{{$item->sort}}</td>
+                <td>{{$item->price}}</td>
 
                 <td>
                     <a href="/home/product/edit/{{$item->id}}" class="btn btn-success btn-sm">修改</a>

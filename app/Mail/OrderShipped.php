@@ -30,5 +30,8 @@ class OrderShipped extends Mailable
     public function build()
     {
         return $this->subject('感謝來信')->markdown('emails.orders.shipped')->with('content',$this->content);
+        //$mesage->subject($subject); 定義信件標題
+        //$mesage->attach($pathToFile, array $options = []); 寄送附件
+        //$mesage->with(變數名稱 ,變數來源);(上方__construct預先定義資料庫內容,引入何種資料庫在construct定義,並無限制)
     }
 }

@@ -36,7 +36,7 @@
                         <!--Btn-->
                         <div class="mbr-section-btn align-left">
                             <a href="/product/{{$item->id}}" class="btn btn-warning-outline display-4">
-                                {{$item->product_types->types}}
+                                {{$item->product_types->types}}加入購物車
                             </a>
                         </div>
                     </div>

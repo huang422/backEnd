@@ -88,6 +88,10 @@
             <label for="sort">SORT</label>
             <input type="number" min="0" class="form-control" id="sort" name="sort" value="{{$product->sort}}">
         </div>
+        <div class="form-group">
+            <label for="price">price</label>
+            <input type="number" min="0" class="form-control" id="price" name="price" value="{{$product->price}}">
+        </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>

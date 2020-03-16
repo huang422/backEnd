@@ -49,6 +49,10 @@
             <label for="sort">sort</label>
             <input type="text" class="form-control" id="sort" name="sort">
           </div>
+          <div class="form-group">
+            <label for="price">price</label>
+            <input type="text" class="form-control" id="price" name="price">
+          </div>
 
           <button type="submit" class="btn btn-primary">Submit</button>
     </div>
