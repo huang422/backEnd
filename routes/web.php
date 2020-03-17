@@ -22,10 +22,14 @@ Route::post('/contact_store', 'FrontController@contact_store');
 Route::get('/product', 'FrontController@product');
 Route::get('/product/{product_id}', 'FrontController@product_detail');
 
-Route::post('/add_cart/{product_id}', 'FrontController@add_cart');
-Route::post('/update_cart/{product_id}', 'FrontController@update_cart');
-Route::post('/delete_cart/{product_id}', 'FrontController@delete_cart');
-Route::get('/cart', 'FrontController@total_cart');
+Route::post('/add_cart/{product_id}', 'FrontController@add_cart'); //加入購物車
+Route::post('/update_cart/{product_id}', 'FrontController@update_cart'); //更新購物車數量
+Route::post('/delete_cart/{product_id}', 'FrontController@delete_cart'); // 刪除商品於購物車
+
+Route::get('/cart', 'FrontController@total_cart'); //cart總攬
+Route::get('/cart_checkout', 'FrontController@cart_checkout'); //cart結帳
+Route::post('/cart_checkout', 'FrontController@post_cart_checkout'); //cart結帳
+
 
 
 

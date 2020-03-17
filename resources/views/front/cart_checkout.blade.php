@@ -124,7 +124,6 @@
                 <div class="Cart__headerGrid">單價</div>
                 <div class="Cart__headerGrid">數量</div>
                 <div class="Cart__headerGrid">小計</div>
-                <div class="Cart__headerGrid">刪除</div>
             </div>
 
             @foreach ($items as $item)
@@ -136,21 +135,59 @@
                 </div>
                 <div class="Cart__productGrid Cart__productPrice">${{$item->price}}</div>
                 <div class="Cart__productGrid Cart__productQuantity">
-                    <button class="btn-minus" data-itemid="{{$item->id}}">-</button>
+
                     <span class="qty" data-itemid="{{$item->id}}">{{$item->quantity}}</span>
-                    <button class="btn-plus" data-itemid="{{$item->id}}">+</button>
+
                 </div>
                 <div class="Cart__productGrid Cart__productTotal">${{$item->price * $item->quantity}}</div>
-                <div class="Cart__productGrid Cart__productDel">
-                    <button class="btn-delete" data-itemid="{{$item->id}}">&times;</button>
-                </div>
             </div>
 
             @endforeach
+
+            總計:{{\Cart::getTotal()}}
+            運費:
+            @if (Cart::getTotal() > 1200)
+            免運費
+            @else
+            $120
+            @endif
+
+
         </div>
 
-        <a href="/cart_checkout"><button class="btn btn-sm btn-primary">確定數量明細</button></a>
+        <div class="container">
+            <div class="card">
+                <form action="/cart_checkout" method="POST">
+                    @csrf
+                    <div class="form-group row">
+                        <label for="recipient_name" class="col-sm col-form-label">收件人名稱</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="recipient_name" name="recipient_name">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="recipient_phone" class="col-sm col-form-label">收件人電話</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="recipient_phone" name="recipient_phone">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="recipient_address" class="col-sm col-form-label">收件人地址</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="recipient_address" name="recipient_address">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="shipment_time" class="col-sm col-form-label">送貨時間</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="shipment_time" name="shipment_time">
+                        </div>
+                    </div>
 
+                    <button class="btn btn-sm btn-primary">成立訂單，並前往付款</button>
+                </form>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -159,84 +196,6 @@
 @section('js')
 
 <script>
-    $.ajaxSetup({
-        headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-
-    $('.btn-minus').click(function(){
-        // console.log(this);
-        var itemid = this.getAttribute('data-itemid');
-
-        $.ajax({
-            url: '/update_cart/'+itemid,
-            method: 'post',
-            data: {
-                quantity:-1,
-            },
-            success: function(res){
-
-            //部分更新，不會整頁更新，較不吃資源，但要連棟更改小計
-            // var old_value = $(`.qty[data-itemid="${itemid}"]`).text();
-            // var new_value = parseInt(old_value) - 1;
-            // $(`.qty[data-itemid="${itemid}"]`).text(new_value);
-
-            //整頁更新
-            window.location.reload()
-
-            },
-            error: function(jqXHR, textStatus, errorThrown){
-                console.error(textStatus + " " + errorThrown);
-            }
-        });
-    });
-
-    $('.btn-plus').click(function(){
-        // console.log(this);
-        var itemid = this.getAttribute('data-itemid');
-
-        $.ajax({
-            url: '/update_cart/'+itemid,
-            method: 'post',
-            data: {
-                quantity:1,
-            },
-            success: function(res){
-
-            //部分更新，不會整頁更新，較不吃資源，但要連棟更改小計
-            // var old_value = $(`.qty[data-itemid="${itemid}"]`).text();
-            // var new_value = parseInt(old_value) + 1;
-            // $(`.qty[data-itemid="${itemid}"]`).text(new_value);
-
-            //整頁更新
-            window.location.reload()
-
-            },
-            error: function(jqXHR, textStatus, errorThrown){
-                console.error(textStatus + " " + errorThrown);
-            }
-        });
-    });
-
-    $('.btn-delete').click(function(){
-        var itemid = this.getAttribute('data-itemid');
-        var r = confirm("確定將購物車商品移除?");
-        if(r==true){
-            $.ajax({
-                url: '/delete_cart/'+itemid,
-                method: 'post',
-                data: {},
-                success: function(res){
-                window.location.reload()
-                },
-                error: function(jqXHR, textStatus, errorThrown){
-                    console.error(textStatus + " " + errorThrown);
-
-                }
-            });
-        }
-    });
 
 
 </script>

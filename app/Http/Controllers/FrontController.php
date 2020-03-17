@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\News;
+use App\Order;
 use App\Contact;
 use App\Product;
 use App\Mail\OrderShipped;
+use App\OrderDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -85,17 +87,11 @@ class FrontController extends Controller
         return redirect('/cart');
     }
 
-    public function total_cart()
-    {
-        $userID = Auth::user()->id;
-        $items = \Cart::session($userID)->getContent();
-        return view('front/cart',compact('items'));
-    }
-
     public function update_cart(Request $request,$product_id)
     {
         $quantity = $request->quantity;
-        \Cart::update($product_id,array(
+        $userID = Auth::user()->id;
+        \Cart::session($userID)->update($product_id, array(
             'quantity' => $quantity,
         ));
         return 'success';
@@ -103,8 +99,58 @@ class FrontController extends Controller
 
     public function delete_cart(Request $request,$product_id)
     {
-        \Cart::remove($product_id);
+        $userID = Auth::user()->id;
+        \Cart::session($userID)->remove($product_id);
         return 'success';
     }
 
+    public function total_cart()
+    {
+        $userID = Auth::user()->id;
+        $items = \Cart::session($userID)->getContent()->sort();
+        return view('front/cart',compact('items'));
+    }
+
+    public function cart_checkout()
+    {
+        $userID = Auth::user()->id;
+        $items = \Cart::session($userID)->getContent()->sort();
+        return view('front/cart_checkout',compact('items'));
+    }
+
+    public function post_cart_checkout(Request $request)
+    {
+        $recipient_name = $request->recipient_name;
+        $recipient_phone = $request->recipient_phone;
+        $recipient_address = $request->recipient_address;
+        $shipment_time = $request->shipment_time;
+
+        $userID = Auth::user()->id;
+        $total_price = \Cart::session($userID)->getTotal();
+        if($total_price > 1200){
+            $shipment_price = 0;
+        }else{
+            $shipment_price = 1200;
+        }
+
+        $order = new Order();
+        $order->recipient_name = $recipient_name;
+        $order->recipient_phone = $recipient_phone;
+        $order->recipient_address = $recipient_address;
+        $order->shipment_time = $shipment_time;
+        $order->total_price = $total_price;
+        $order->shipment_price = $shipment_price;
+        $order->save();
+
+        $new_order_id = $order->id;
+        $items = \Cart::session($userID)->getContent();
+        foreach($items as $row){
+            $order_detail = new OrderDetail();
+            $order_detail->order_id = $new_order_id;
+            $order_detail->product_id = $row->id;
+            $order_detail->qty = $row->quantity;
+            $order_detail->price = $row->price;
+            $order_detail->save();
+        }
+    }
 }
