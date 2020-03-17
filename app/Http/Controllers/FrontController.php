@@ -54,7 +54,9 @@ class FrontController extends Controller
         //store
         $contact_data = $request->all();
         $content = Contact::create($contact_data);
-        Mail::to('huang1473690@gmail.com')->send(new OrderShipped($content)); //寄信
+        //寄信
+        Mail::to($contact_data['email'])->send(new OrderShipped($content)); //to user
+        Mail::to('b29791fad1-5e6f9f@inbox.mailtrap.io')->send(new OrderShipped($content)); //to admin
         return redirect('/contact');
     }
 
@@ -88,6 +90,21 @@ class FrontController extends Controller
         $userID = Auth::user()->id;
         $items = \Cart::session($userID)->getContent();
         return view('front/cart',compact('items'));
+    }
+
+    public function update_cart(Request $request,$product_id)
+    {
+        $quantity = $request->quantity;
+        \Cart::update($product_id,array(
+            'quantity' => $quantity,
+        ));
+        return 'success';
+    }
+
+    public function delete_cart(Request $request,$product_id)
+    {
+        \Cart::remove($product_id);
+        return 'success';
     }
 
 }

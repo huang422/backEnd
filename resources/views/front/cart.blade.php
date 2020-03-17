@@ -106,6 +106,8 @@
             line-height: 60px;
             background: #ffc0cb26;
         }
+
+
     }
 </style>
 
@@ -143,9 +145,15 @@
                     {{$item->name}}
                 </div>
                 <div class="Cart__productGrid Cart__productPrice">${{$item->price}}</div>
-                <div class="Cart__productGrid Cart__productQuantity">{{$item->quantity}}</div>
+                <div class="Cart__productGrid Cart__productQuantity">
+                    <button class="btn-minus" data-itemid="{{$item->id}}">-</button>
+                    <span class="qty" data-itemid="{{$item->id}}">{{$item->quantity}}</span>
+                    <button class="btn-plus" data-itemid="{{$item->id}}">+</button>
+                </div>
                 <div class="Cart__productGrid Cart__productTotal">${{$item->price * $item->quantity}}</div>
-                <div class="Cart__productGrid Cart__productDel">&times;</div>
+                <div class="Cart__productGrid Cart__productDel">
+                    <button class="btn-delete" data-itemid="{{$item->id}}">&times;</button>
+                </div>
             </div>
 
             @endforeach
@@ -160,6 +168,74 @@
 @section('js')
 
 <script>
+    $.ajaxSetup({
+        headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $('.btn-minus').click(function(){
+        var itemid = this.getAttribute('data-itemid');
+
+        $.ajax({
+                  url: '/update_cart/'+itemid,
+                  method: 'post',
+                  data: {
+                     quantity:-1,
+                  },
+                  success: function(res){
+                    var old_value = $(`.qty[data-itemid="${itemid}"]`).text();
+                    var new_value = parseInt(old_value) - 1;
+                    $(`.qty[data-itemid="${itemid}"]`).text(new_value);
+                  },
+                  error: function(jqXHR, textStatus, errorThrown){
+                      console.error(textStatus + " " + errorThrown);
+
+                  }
+               });
+    });
+
+    $('.btn-plus').click(function(){
+        var itemid = this.getAttribute('data-itemid');
+
+        $.ajax({
+                  url: '/update_cart/'+itemid,
+                  method: 'post',
+                  data: {
+                     quantity:-1,
+                  },
+                  success: function(res){
+                    var old_value = $(`.qty[data-itemid="${itemid}"]`).text();
+                    var new_value = parseInt(old_value) + 1;
+                    $(`.qty[data-itemid="${itemid}"]`).text(new_value);
+                  },
+                  error: function(jqXHR, textStatus, errorThrown){
+                      console.error(textStatus + " " + errorThrown);
+
+                  }
+               });
+    });
+
+    $('.btn-delete').click(function(){
+        var itemid = this.getAttribute('data-itemid');
+        var r = confirm("確定將購物車商品移除?");
+        if(r==true){
+            $.ajax({
+                  url: '/delete_cart/'+itemid,
+                  method: 'post',
+                  data: {},
+                  success: function(res){
+                    console.log(res);
+                  },
+                  error: function(jqXHR, textStatus, errorThrown){
+                      console.error(textStatus + " " + errorThrown);
+
+                  }
+               });
+        }
+
+
+    });
 
 
 </script>

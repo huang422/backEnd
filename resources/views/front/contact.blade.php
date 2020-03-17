@@ -35,25 +35,25 @@
                         <div class="col-md-4  form-group" data-for="name">
                             <label for="name-form1-4" class="form-control-label mbr-fonts-style display-7">Name</label>
                             <input type="text" name="name" data-form-field="Name" required="required"
-                                class="form-control display-7" id="name-form1-4">
+                                class="form-control display-7" id="name">
                         </div>
                         <div class="col-md-4  form-group" data-for="email">
                             <label for="email-form1-4"
                                 class="form-control-label mbr-fonts-style display-7">Email</label>
                             <input type="email" name="email" data-form-field="Email" required="required"
-                                class="form-control display-7" id="email-form1-4">
+                                class="form-control display-7" id="email">
                         </div>
                         <div data-for="phone" class="col-md-4  form-group">
                             <label for="phone-form1-4"
                                 class="form-control-label mbr-fonts-style display-7">Phone</label>
                             <input type="tel" name="phone" data-form-field="Phone" class="form-control display-7"
-                                id="phone-form1-4">
+                                id="phone">
                         </div>
                         <div data-for="message" class="col-md-12 form-group">
                             <label for="message-form1-4"
                                 class="form-control-label mbr-fonts-style display-7">Message</label>
                             <textarea name="message" data-form-field="Message" class="form-control display-7"
-                                id="message-form1-4"></textarea>
+                                id="message"></textarea>
                         </div>
 
                         {{-- recaptcha --}}

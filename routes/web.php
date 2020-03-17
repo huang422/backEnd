@@ -20,11 +20,13 @@ Route::get('/contact', 'FrontController@contact');
 Route::post('/contact_store', 'FrontController@contact_store');
 
 Route::get('/product', 'FrontController@product');
-
 Route::get('/product/{product_id}', 'FrontController@product_detail');
 
 Route::post('/add_cart/{product_id}', 'FrontController@add_cart');
+Route::post('/update_cart/{product_id}', 'FrontController@update_cart');
+Route::post('/delete_cart/{product_id}', 'FrontController@delete_cart');
 Route::get('/cart', 'FrontController@total_cart');
+
 
 
 
