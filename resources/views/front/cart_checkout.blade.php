@@ -142,6 +142,8 @@
                 <div class="Cart__productGrid Cart__productTotal">${{$item->price * $item->quantity}}</div>
             </div>
 
+
+
             @endforeach
 
             <?php
@@ -156,7 +158,7 @@
                 <p>運費:${{$shipment_price}}</p>
                 <p>總計:{{\Cart::getTotal() + $shipment_price}}</p>
             </div>
-            
+
         </div>
 
         <div class="container">

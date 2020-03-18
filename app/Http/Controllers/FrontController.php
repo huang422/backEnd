@@ -175,7 +175,6 @@ class FrontController extends Controller
                 'qty' => $row->quantity,
                 'price' => $row->price,
                 'unit' => '個',
-
             ];
             array_push($items, $item);
         }
@@ -215,7 +214,6 @@ class FrontController extends Controller
         ];
 
         //清空購物車
-
         \Cart::session($userID)->clear();
 
         return $this->checkout->setNotifyUrl(route('notify'))->setReturnUrl(route('return'))->setPostData($formData)->send();
@@ -259,13 +257,14 @@ class FrontController extends Controller
 
                 //付款完成，下面接下來要將購物車訂單狀態改為已付款
                 //目前是顯示所有資料將其DD出來
-                dd($this->checkoutResponse->collectResponse($serverPost));
+                // dd($this->checkoutResponse->collectResponse($serverPost));
 
                 $order_no = $serverPost["MerchantTradeNo"];
                 $order = Order::where('order_no', $order_no)->first();
-                $order->status = "已完成";
+                $order->payment_status = "已付款";
                 $order->save();
-                return redirect("/checkoutend/{$order_no}");
+                // return redirect("/checkoutend/{$order_no}");
+                return '訂單完成';
             }
         }
     }

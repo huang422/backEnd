@@ -45,7 +45,9 @@
     <div class="container">
         <div class="row">
             <div class="col-6">
-
+                <div class="card-img">
+                    <img src="{{$Product->img}}" alt="">
+                </div>
             </div>
             <div class="col-6">
                 <div class="product-card">
