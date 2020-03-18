@@ -77,6 +77,16 @@
                         Contact
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link link text-white display-4" href="/cart">
+
+                        <?php
+                            $cartCollection = Cart::getContent();
+                            $count = $cartCollection->count();
+                        ?>
+                        Cart ( {{$count}} )
+                    </a>
+                </li>
 
             </ul>
             <div class="navbar-buttons mbr-section-btn">

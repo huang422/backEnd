@@ -30,6 +30,17 @@ Route::get('/cart', 'FrontController@total_cart'); //cart總攬
 Route::get('/cart_checkout', 'FrontController@cart_checkout'); //cart結帳
 Route::post('/cart_checkout', 'FrontController@post_cart_checkout'); //cart結帳
 
+Route::get('/test_check_out', 'FrontController@test_check_out');
+
+Route::prefix('cart_ecpay')->group(function(){
+
+    //當消費者付款完成後，綠界會將付款結果參數以幕後(Server POST)回傳到該網址。
+    Route::post('notify', 'FrontController@notifyUrl')->name('notify');
+
+    //付款完成後，綠界會將付款結果參數以幕前(Client POST)回傳到該網址
+    Route::post('return', 'FrontController@returnUrl')->name('return');
+});
+
 
 
 
